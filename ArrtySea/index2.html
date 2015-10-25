@@ -1,80 +1,51 @@
-<!DOCTYPE  html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>ArrtySea</title>
-		<link rel="stylesheet" href="style.css" type="text/css" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript">
-            function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else{
-          e.style.display = 'block';
-    }
-
-        
-        }
-            
-          
-		</script>
-        
-        
-        
+		<meta name="viewport" content=" width-device, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" charset="utf-8">
+		<link rel="stylesheet" href="style.css" />
 		<script src="socket.io/socket.io.js"></script>
-        
+		
 	</head>
 	<body>
-        
-		<section id="menubar">
-			<ul>
-				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img src="images/menu.png" /></a></li>
-			</ul>
-		</section>
+        <section id="menubar">
+         <ul>
+            <li><a class="menubutton" href="#menu"<img src="https://cdn.css-tricks.com/wp-content/uploads/2012/10/threelines.png"/></a></li>
+            </ul>
+    </section>
 		<header>
-			ArrtySea
-		</header>
-        <nav id="navigation" class="nav">
-			<ul>
-				<li><a  onclick="toggle_visibility('chatroom'),toggle_visibility('name'),toggle_visibility('senden'),toggle_visibility('unten')" class="active">Show/Hide Chat</a></li>
-                <li><a onclick="toggle_visibility('filetransfer')">Show/Hide Filetransfer</a></li>
-				
-			</ul>
-		</nav>
-		
-		<section id="main">
-			
-                <article id="einzigartig" >
-                    <h1>RealTimeCommunication</h1>
-                    <h2 id="title">Start a room</h2>
+            ArrtySea
+        </header>
+        
+        
+    
+            
+            <div align="center">
+        <h1 id="title">Start a room</h1>
         <p id="subTitle"></p>
         <form name="submitButton" onsubmit="return ändern()" id="createRoom">
             <input id="sessionInput"/>
             <button id="submitBut" type="button">Create it!</button>
         </form>
-                    <div class="parent">
+                </div>
+<section id="main">
+        <div class="parent">
         <div id="remotes"></div>
         <div class="videoContainer1">
             <video id="localVideo" oncontextmenu="return false;"></video>
             <div id="localVolume" class="volume_bar"></div>
         </div>
             </div>
-                </article>
-			<aside id="seite">
-				
-				<section id="chatroom">
-                    <h2>ChatRoom</h2>
-					 <ul id="content"></ul>					
-				</section>
-                <section id="filetransfer">
-					<h2>Filetransfer</h2>
-					<div id="remotes1"></div>
-				</section>
-				
-			</aside>
-		</section>
-         <script src="simplewebrtc.bundle.js"></script>
+        <aside align="right">
+        <div id="remotes1"></div>
+        </aside>
+            
+        <ul id="content"></ul>
+        </section>
+        
+       
+        
+        <script src="simplewebrtc.bundle.js"></script>
         <script>
             // grab the room from the URL
             var room = location.search && location.search.split('?')[1];
@@ -384,9 +355,8 @@ webrtc.on('connectivityError', function (peer) {
 
         </script>
 
-        
-        
-		<footer id="unten" >
+
+		<footer>
 			<input onkeypress="return myFunction(event)" id="name" type="text" placeholder="Dein Name" />
 			<input onclick="versuchsenden()" id="senden" type="submit" class="btn" value="Senden" />
 		</footer>

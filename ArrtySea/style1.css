@@ -1,0 +1,270 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+    font:"Comic Sans MS";
+	color: #333;
+    background-color: #ffffff;
+    background: url(http://www.vivicom.de/images/article/bluevision/logitech_konferenz.jpg) no-repeat center center ;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+
+}
+h1
+{
+font-size: 2.5em;
+    line-height: 1em;
+    font-family: Helvetica;
+    font-weight: 100;
+    margin:0em;
+    color: #2F2D2C;
+
+}
+
+p{
+
+    color: #2F2D2C;
+    line-height: 1em;
+    font-family: Helvetica;
+    font-weight: 100;
+    margin:0em;
+    padding: 1.25em;
+    
+
+}
+ul{
+margin:0px;
+padding:0px;
+}
+
+a {
+    text-decoration: none;
+}
+#menubar {
+    display:block;
+    background: #FFFFFF;
+}
+#menubar ul {
+display: block;
+    width: 2em;
+    padding: 0.9em;
+}
+#menubar ul li {
+    
+    display: inline;
+}
+
+
+/* Filetransfer CSS*/
+.alert img {
+                float:left;
+                padding-right: 10px;
+            }
+
+            .peerblock {
+                width: 800px;
+                border-radius:2px;
+                border:1px solid gray;
+            }
+
+            .receiveBlock {
+                width: 500px;
+                margin:10px;
+                display: inline-block;
+            }
+            .dragndrop {
+                display: inline-block;
+                padding:2em;
+                margin: 2px;
+                border:2px solid black;
+                border-radius: 5px;
+            }
+            .dragndropStatus {
+                display: inline-block;
+            }
+            .connecting {
+                background-color: yellow;
+            }
+            .usesSockets {
+                background-color: pink;
+            }
+            .notConnected {
+                visibility:hidden;
+            }
+            .connected {
+                background-color: #e0ffe0;
+            }
+            .notConnected:hover {
+                margin: 1px;
+                border-width: 3px;
+            }
+            .connected:hover {
+                margin: 1px;
+                border-width:3px;
+            }
+            .connectButton {
+                padding:2em;
+            }
+
+/*WebRTC CSS*/
+
+.videoContainer {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                
+                
+            }
+            .videoContainer1 {
+ position: absolute;
+    width: 30%;
+    height: 30%;
+    z-index: 1;
+    bottom: 1%;
+    left: 40%;
+    z-index: 1
+            }
+    .main{
+     position: relative;
+    display:block;
+    width: 96%;
+    max-width: 960px;
+    margin: 1.25em auto;
+    padding: 0em;
+             }
+aside{
+display: inline-block;
+    width: 30.6%;
+    margin-left: 3%;
+    padding:0em;
+    vertical-align: top;
+
+}
+.parent {
+    left: 30%;
+    display: inline-block;
+    width: 65.3%;
+    max-width: 560px;
+    vertical-align: top;
+    margin:0 em;
+    padding: 10em;
+    
+}
+#remotes{
+width: 100%;
+    height: 100%;
+}
+
+            .videoContainer1 video {
+              margin: 0px auto;
+                
+                width: 100%;
+                height: 100%;
+                
+            }
+            .videoContainer video {
+                margin: 0px auto;
+                
+                width: 100%;
+                height: 100%;
+            }
+            .volume_bar {
+                position: absolute;
+                width: 5px;
+                height: 0px;
+                right: 0px;
+                bottom: 0px;
+                background-color: #12acef;
+            }
+        
+        
+header, footer{
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: auto;
+	padding: 0 10px;
+	background-color: #4bc8c8;
+	font-size: 24px;
+	line-height: 35px;
+	height: 45px;
+	color: #ffffff;
+}
+header{
+	font-weight: bold;
+    position: relative;
+}
+footer{
+	top: auto;
+	bottom: 0;
+    z-index: 2;
+}
+input{
+    font-family: "Comic Sans MS";
+	font-size: 14px;
+}
+#content{
+	margin: 3em;
+	list-style: none;
+    height: 7.5em;
+    overflow: auto;
+   background-color: lightcyan;
+}
+
+/* Datachannel*/
+.fileList{
+    list-style: none;
+}
+li span {
+    margin-right: 1em;
+    
+}
+
+.groesse{
+    
+}
+
+progress {
+    margin-right: 1em;
+    width: 10%;
+  height: 10px;
+}
+
+li .filename {
+    display: inline-block;
+    
+}
+
+.peerContainer {
+    margin-bottom: 1em;
+}
+
+.p2pChecking {
+    background-color: #ffeed7;
+}
+.p2pConnected, .p2pCompleted {
+    -moz-box-shadow: inset 0 0 15px 5px #DDD;
+-webkit-box-shadow: inset 0 0 15px 5px #DDDDE5;
+box-shadow: inset 0 0 15px 5px #DDD;
+border-radius: 40px;
+-moz-border-radius: 40px;
+-webkit-border-radius: 40px;
+}
+.p2pFailed {
+    background-color: #ffe3eb
+}
+.p2pDisconnected {
+    background-color: #ffeed7;
+}
+.p2pClosed {
+    background-color: #f5f7f8;
+}
+
+.receiving a {
+    color: #ec008c;
+}
