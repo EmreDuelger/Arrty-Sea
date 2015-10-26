@@ -1,10 +1,23 @@
 <!DOCTYPE  html>
 <html>
 	<head>
-		<title>ArrtySea</title>
+		<title>ArrtySea</title>        
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
+        <link rel="shortcut icon" sizes="196x196" href="icons/android-chrome-196x196.png">
+        <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="apple-mobile-web-app-title" content="Arrty Sea">
+        <meta name="application-name" content="Arrty Sea">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#4bc8c8">
+        
 		<link rel="stylesheet" href="style.css" type="text/css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript">
             function toggle_visibility(id) {
        var e = document.getElementById(id);
@@ -16,7 +29,7 @@
 
         
         }
-           
+            
           
 		</script>
         
@@ -28,13 +41,10 @@
 	<body>
         
 		<section id="menubar">
-			<ul>
-				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img id="oben" src="images/menu.png" /></a></li>
-
+            <ul>
+				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img src="images/menu.png" height="18" width="20" /></a></li>
 			</ul>
 		</section>
-		<header>
-			
 		</header>
         <nav id="navigation" class="nav">
 			<ul>
@@ -47,11 +57,11 @@
 		<section id="main">
 			
                 <article id="einzigartig" >
-                  
+                    <h1>RealTimeCommunication</h1>
                     <h2 id="title">Start a room</h2>
         <p id="subTitle"></p>
         <form name="submitButton" onsubmit="return ändern()" id="createRoom">
-            <input onkeypress="return funktionAufrufen(event)" id="sessionInput"/>
+            <input id="sessionInput"/>
             <button id="submitBut" type="button">Create it!</button>
         </form>
                     <div class="parent">
@@ -160,7 +170,6 @@
                 var bodyActive= document.getElementById("bodyElement");
                 bodyActive.className= "active";
             }
-            
             if (room) {
                 setRoom(room);
             } else {
@@ -209,7 +218,7 @@
             });
         </script>
         
-      <!--DATA-->
+         <!--DATA-->
           <script>
 // grab the room from the URL
 var room = location.search && location.search.split('?')[1];
@@ -223,25 +232,23 @@ webrtc.on('createdPeer', function (peer) {
     var container = document.createElement('div');
     container.className = 'peerContainer';
     container.id = 'container_' + webrtc.getDomId(peer);
-    var containername =container.id;
 
-  // show a file select form
-    var fileinput = document.createElement('input');
-    fileinput.type = 'file';
-    fileinput.id="Upload";
 
-   
     // show a list of files received / sending
     var filelist = document.createElement('ul');
     filelist.className = 'fileList';
     container.appendChild(filelist);
- // send a file
+
+    // show a file select form
+    var fileinput = document.createElement('input');
+    fileinput.type = 'file';
+
+    // send a file
     fileinput.addEventListener('change', function() {
         fileinput.disabled = true;
 
         var file = fileinput.files[0];
         var sender = peer.sendFile(file);
-  
 
         // create a file item
         var item = document.createElement('li');
@@ -250,7 +257,7 @@ webrtc.on('createdPeer', function (peer) {
         // make a label
         var span = document.createElement('span');
         span.className = 'filename';
-        span.appendChild(document.createTextNode(file.name+" "));
+        span.appendChild(document.createTextNode(file.name));
         item.appendChild(span);
 
         span = document.createElement('span');
@@ -314,8 +321,7 @@ webrtc.on('createdPeer', function (peer) {
 
                 // disable file sending
                 fileinput.disabled = 'disabled';
-                var elem = document.getElementById(containername);
-                elem.parentNode.removeChild(elem);
+                // FIXME: remove container, but when?
                 break;
             }
         });
@@ -335,7 +341,7 @@ webrtc.on('createdPeer', function (peer) {
         item.appendChild(span);
 
         span = document.createElement('span');
-        span.appendChild(document.createTextNode((+metadata.size/1048576).toFixed(2) + ' MB'));
+        span.appendChild(document.createTextNode((metadata.size/1048576).toFixed(2) + ' MB'));
         item.appendChild(span);
 
         // create a progress element
@@ -365,31 +371,28 @@ webrtc.on('createdPeer', function (peer) {
 
 // local p2p/ice failure
 webrtc.on('iceFailed', function (peer) {
-    var connstate = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('local fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
-        connstate.parentNode.removeChild(connstate);
     }
 });
 
-
 // remote p2p/ice failure
 webrtc.on('connectivityError', function (peer) {
-    var connstate = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('remote fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
-       
-connstate.parentNode.removeChild(connstate);
-        
     }
 });
-              document.getElementById("remotes1").scrollTop=document.getElementsById("remotes1").scrollHeight;
+
+
+
         </script>
 
         
