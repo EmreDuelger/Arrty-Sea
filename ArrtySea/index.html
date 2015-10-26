@@ -4,7 +4,7 @@
 		<title>ArrtySea</title>
 		<link rel="stylesheet" href="style.css" type="text/css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		
 		<script type="text/javascript">
             function toggle_visibility(id) {
        var e = document.getElementById(id);
@@ -30,10 +30,11 @@
 		<section id="menubar">
 			<ul>
 				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img id="oben" src="images/menu.png" /></a></li>
+
 			</ul>
 		</section>
 		<header>
-			ArrtySea
+			
 		</header>
         <nav id="navigation" class="nav">
 			<ul>
@@ -207,7 +208,7 @@
             });
         </script>
         
-         <!--DATA-->
+      <!--DATA-->
           <script>
 // grab the room from the URL
 var room = location.search && location.search.split('?')[1];
@@ -221,23 +222,25 @@ webrtc.on('createdPeer', function (peer) {
     var container = document.createElement('div');
     container.className = 'peerContainer';
     container.id = 'container_' + webrtc.getDomId(peer);
+    var containername =container.id;
 
+  // show a file select form
+    var fileinput = document.createElement('input');
+    fileinput.type = 'file';
+    fileinput.id="Upload";
 
+   
     // show a list of files received / sending
     var filelist = document.createElement('ul');
     filelist.className = 'fileList';
     container.appendChild(filelist);
-
-    // show a file select form
-    var fileinput = document.createElement('input');
-    fileinput.type = 'file';
-
-    // send a file
+ // send a file
     fileinput.addEventListener('change', function() {
         fileinput.disabled = true;
 
         var file = fileinput.files[0];
         var sender = peer.sendFile(file);
+  
 
         // create a file item
         var item = document.createElement('li');
@@ -246,7 +249,7 @@ webrtc.on('createdPeer', function (peer) {
         // make a label
         var span = document.createElement('span');
         span.className = 'filename';
-        span.appendChild(document.createTextNode(file.name));
+        span.appendChild(document.createTextNode(file.name+" "));
         item.appendChild(span);
 
         span = document.createElement('span');
@@ -310,7 +313,8 @@ webrtc.on('createdPeer', function (peer) {
 
                 // disable file sending
                 fileinput.disabled = 'disabled';
-                // FIXME: remove container, but when?
+                var elem = document.getElementById(containername);
+                elem.parentNode.removeChild(elem);
                 break;
             }
         });
@@ -330,7 +334,7 @@ webrtc.on('createdPeer', function (peer) {
         item.appendChild(span);
 
         span = document.createElement('span');
-        span.appendChild(document.createTextNode((metadata.size/1048576).toFixed(2) + ' MB'));
+        span.appendChild(document.createTextNode((+metadata.size/1048576).toFixed(2) + ' MB'));
         item.appendChild(span);
 
         // create a progress element
@@ -360,28 +364,31 @@ webrtc.on('createdPeer', function (peer) {
 
 // local p2p/ice failure
 webrtc.on('iceFailed', function (peer) {
-    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('local fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
+        connstate.parentNode.removeChild(connstate);
     }
 });
 
+
 // remote p2p/ice failure
 webrtc.on('connectivityError', function (peer) {
-    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('remote fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
+       
+connstate.parentNode.removeChild(connstate);
+        
     }
 });
-
-
-
+              document.getElementById("remotes1").scrollTop=document.getElementsById("remotes1").scrollHeight;
         </script>
 
         
