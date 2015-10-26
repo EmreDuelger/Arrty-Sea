@@ -16,7 +16,7 @@
 
         
         }
-            
+           
           
 		</script>
         
@@ -29,7 +29,7 @@
         
 		<section id="menubar">
 			<ul>
-				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img src="images/menu.png" /></a></li>
+				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img id="oben" src="images/menu.png" /></a></li>
 			</ul>
 		</section>
 		<header>
@@ -46,11 +46,11 @@
 		<section id="main">
 			
                 <article id="einzigartig" >
-                    <h1>RealTimeCommunication</h1>
+                  
                     <h2 id="title">Start a room</h2>
         <p id="subTitle"></p>
         <form name="submitButton" onsubmit="return ändern()" id="createRoom">
-            <input id="sessionInput"/>
+            <input onkeypress="return funktionAufrufen(event)" id="sessionInput"/>
             <button id="submitBut" type="button">Create it!</button>
         </form>
                     <div class="parent">
