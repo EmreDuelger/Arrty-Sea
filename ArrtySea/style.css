@@ -82,12 +82,14 @@ nav ul li a {
 }
 
 nav ul li a:hover {
+	border-bottom: 0.188em solid #E7590B;
+}
+
+nav ul li a:active {
 	background:#DBD9D8;
-	border-bottom: 0.188em solid #E7590B;
 }
-nav ul li a.active {
-	border-bottom: 0.188em solid #E7590B;
-}
+
+
 
 /* Für die mobile Ansicht benötigte Leiste */
 #menubar {
@@ -96,11 +98,24 @@ nav ul li a.active {
     background-image: url(images/title.png);
     background-position: center;
     background-repeat: no-repeat;
+ /* Logo rechts
     border-image: url(images/penguin.png) 0 50 50 0 stretch repeat;
-    border-image-width:auto;
+    border-image-width:auto; */
    	line-height: 35px;
-	height: 45px;
+	height: 45px; 
 } 
+
+.homebutton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.homebutton:active {
+    border-image: url(icons/android-chrome-36x36.png) 0 0 0 0 stretch repeat;
+    border-image-width:auto;
+}
+
 #menubar ul {
 	display:block;
 	width:2em;
