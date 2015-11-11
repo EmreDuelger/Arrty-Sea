@@ -1,0 +1,15 @@
+# Arrty-Sea
+Die Webanwendung ermöglicht Echtzeitkommunikation für zwei Personen. Sie haben die Möglichkeit sich gegenseitig zu hören und zu sehen, miteinander zu chatten und Dateien zu senden und empfangen. Sie möchten mehr erfahren? Dann lesen Sie weiter und probieren Sie es selbst aus!
+
+Downloaden Sie den Ordner und machen Sie in der Eingabekonsole "npm install". In der Eingabekonsole starten Sie den Server, indem Sie "node server.js" eintippen.
+Danach gehen Sie in diesem Fall auf "https://localhost:8080/".
+
+Dann müssen Sie einfach einen Raum kreieren und diesen Link Ihrem Partner senden. Sie können die Anwendung nun mit den beschriebenen Funktionalitäten austesten.
+Die Webanwendung wurde "responsive" gestaltet, sodass sich die Webanwendung, der Größe des Geräts (Laptop, Tablet, Smartphone) entsprechend, verhält.
+Die Webanwendung kann als "Quasi-App" gespeichert werden, indem Sie auf dem Browser Ihres Smartphones "Zum Startbildschirm hinzufügen" klicken.
+##Genutzte Technologien
+| CSS       | JavaScript          | Html  |
+| ------------- |:-------------:| -----:|
+| Responsive Webdesign      | Node.js| WebRTC|
+|      | NPM    |   Web Sockets |
+|  |      |  Filetransfer|
