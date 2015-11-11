@@ -5,19 +5,10 @@ var privateKey = fs.readFileSync('fakekeys/privatekey.pem').toString(),
     certificate = fs.readFileSync('fakekeys/certificate.pem').toString()
 ,   app = express()
 ,   conf = require('./config.json')
-//,   http = require('http')
+
 ,   https = require('https').createServer({key: privateKey, cert: certificate}, app).listen(conf.port)
 ,   io = require('socket.io').listen(https);
 
-// Webserver
-// auf den Port der config.json schalten (8080)
-// http.listen(conf.port);
-
-
-
-//RTC
-//https.createServer({key: privateKey, cert: certificate}, app).listen(conf.port);
-//http.createServer(app).listen(conf.port);
 
 
 app.configure(function(){
@@ -28,7 +19,7 @@ app.configure(function(){
 // wenn der Pfad "/" aufgerufen wird...
 app.get('/', function (req, res) {
 	// ...wird die Datei index.html ausgegeben
-	res.sendfile(__dirname + '/public/index.html');
+	res.sendfile(__dirname + 'index.html');
 });
 
 // Websocket

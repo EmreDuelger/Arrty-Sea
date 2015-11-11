@@ -1,15 +1,15 @@
 <!DOCTYPE  html>
 <html>
 	<head>
-		<title>ArrtySea</title>        
-
+		<title>ArrtySea</title>           
+        <!-- Verschiedene Varianten des Pinguins für Android & IOS-->
         <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
         <link rel="shortcut icon" sizes="196x196" href="icons/android-chrome-196x196.png">
         <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="manifest" href="/icons/manifest.json">
+        <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="apple-mobile-web-app-title" content="Arrty Sea">
         <meta name="application-name" content="Arrty Sea">
         <meta name="msapplication-TileColor" content="#da532c">
@@ -17,68 +17,71 @@
         
 		<link rel="stylesheet" href="style.css" type="text/css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		
 		<script type="text/javascript">
+            //Funktion zum anzeigen und verbergen
             function toggle_visibility(id) {
        var e = document.getElementById(id);
        if(e.style.display == 'block')
           e.style.display = 'none';
        else{
           e.style.display = 'block';
-    }
-
-        
+            }
         }
-            
-          
 		</script>
-        
-        
-        
-		<script src="socket.io/socket.io.js"></script>
+		<script src="socket.io/socket.io.js">//Script für den Chat</script>
+        <!-- Chatscript -->
+        <script src="client.js"></script>
         
 	</head>
 	<body>
-        
+        <!-- Der Bereich, wo die Schrift und das Logo zu sehen sind. In der mobilen Ansicht erscheint der 'menubutton'. -->
 		<section id="menubar">
             <div class="homebutton"><img src="images/penguin.png" heigt="38" width="38"   onclick="location.href='/';" /></div>
             <ul>
-				<li><a onclick="toggle_visibility('navigation')" class="menubutton" ><img src="images/menu.png" height="18" width="20" /></a></li>
+				<li>
+                    <a onclick="toggle_visibility('navigation')" class="menubutton" ><img src="images/menu.png" height="18" width="20" /></a>                               </li>
 			</ul>
 		</section>
-		</header>
+        <!-- Die Navigationsleiste, welche in der mobilen Ansicht versteckt wird.-->
+		
         <nav id="navigation" class="nav">
 			<ul>
-				<li><a  onclick="toggle_visibility('chatroom'),toggle_visibility('name'),toggle_visibility('senden'),toggle_visibility('unten')" class="active">Show/Hide Chat</a></li>
-                <li><a onclick="toggle_visibility('filetransfer')">Show/Hide Filetransfer</a></li>
+				<li><a  onclick="toggle_visibility('chatroom'),toggle_visibility('name'),toggle_visibility('senden'),toggle_visibility('unten')" class="active">Show/Hide Chat</a>
+                </li>
+                <li><a onclick="toggle_visibility('filetransfer')">Show/Hide Filetransfer</a>
+                </li>
 				
 			</ul>
 		</nav>
 		
 		<section id="main">
-			
-                <article id="einzigartig" >
-                    <h1>RealTimeCommunication</h1>
-                    <h2 id="title">Start a room</h2>
-        <p id="subTitle"></p>
-        <form name="submitButton" onsubmit="return ändern()" id="createRoom">
-            <input id="sessionInput"/>
-            <button id="submitBut" type="button">Create it!</button>
-        </form>
-                    <div class="parent">
-        <div id="remotes"></div>
-        <div class="videoContainer1">
-            <video id="localVideo" oncontextmenu="return false;"></video>
-            <div id="localVolume" class="volume_bar"></div>
-        </div>
-            </div>
-                </article>
+            <!-- Der Hauptbereich, wo ein Raum erstellt werden kann und das Video-Element vom Peer und das eigene Video-Element angezeigt wird.-->
+			<article id="einzigartig" >
+                 <h2 id="title">Start a room</h2>
+                 <p id="subTitle"></p>
+                <!-- Den Namen des Raums eintippen und auf "Create it!" klicken. -->
+                 <form name="submitButton" onsubmit="return ändern()" id="createRoom">
+                        <input id="sessionInput"/>
+                        <button id="submitBut" type="button">Create it!</button>
+                 </form>
+                 <div class="parent">
+                     <!-- Platzhalter für die Video-Elemente/ Video auf Video, dass vom Gegenüber ist groß-->
+                    <div id="remotes"></div>
+                    <div class="videoContainer1">
+                        <video id="localVideo" oncontextmenu="return false;"></video>
+                    <div id="localVolume" class="volume_bar"></div>
+                    </div>
+                </div>
+            </article>
+            <!-- Der Bereich rechts. Hier werden Filetransfer und ChatRoom angezeigt.-->
 			<aside id="seite">
-				
+				<!-- Zeigt den Chatverlauf an -->
 				<section id="chatroom">
                     <h2>ChatRoom</h2>
 					 <ul id="content"></ul>					
 				</section>
+                <!-- Datei auswählen und senden, Datei empfangen, Anzeige von Fortschritt und Status der Verbindung-->
                 <section id="filetransfer">
 					<h2>Filetransfer</h2>
 					<div id="remotes1"></div>
@@ -88,28 +91,31 @@
 		</section>
          <script src="simplewebrtc.bundle.js"></script>
         <script>
-            // grab the room from the URL
+            
+            
+            // die URL in der Variable room speichern
             var room = location.search && location.search.split('?')[1];
-            // create our webrtc connection
+            // webrtc connection aufbauen
             var webrtc = new SimpleWebRTC({
-                // the id/element dom element that will hold "our" video
+                // das Element welches unser Video 'halten' wird
                 localVideoEl: 'localVideo',
-                // the id/element dom element that will hold remote videos
+                // das Element welches das Video von unserem Gegenüber halten wird
                 remoteVideosEl: '',
-                // immediately ask for camera access
+                // Fragen, ob der Zugriff zum Video erlaubt wird
                 autoRequestMedia: true,
                 debug: false,
                 detectSpeakingEvents: true,
                 autoAdjustMic: false
             });
-            // when it's ready, join if we got a room from the URL
+            // wenn es bereit ist, dem Raum beitreten
             webrtc.on('readyToCall', function () {
-                // you can name it anything
+                // den Namen einen Raum geben
                 if (room) webrtc.joinRoom(room);
             });
+            // die Funktion welches den blauen Balken größer und kleiner werden lässt beim Sprechen
             function showVolume(el, volume) {
                 if (!el) return;
-                if (volume < -45) { // vary between -45 and -20
+                if (volume < -45) { 
                     el.style.height = '0px';
                 } else if (volume > -20) {
                     el.style.height = '100%';
@@ -117,11 +123,14 @@
                     el.style.height = '' + Math.floor((volume + 100) * 100 / 25 - 220) + '%';
                 }
             }
+            //Anzeigen der Lautstärke des Peer
             webrtc.on('channelMessage', function (peer, label, data) {
                 if (data.type == 'volume') {
                     showVolume(document.getElementById('volume_' + peer.id), data.volume);
                 }
             });
+            //erstellen von Elementen um die Anzeige des Peer zu ermöglichen müssen
+            //diese müssen in unsere Struktur angefügt werden 
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer);
                 var remotes = document.getElementById('remotes');
@@ -133,14 +142,12 @@
                     var vol = document.createElement('div');
                     vol.id = 'volume_' + peer.id;
                     vol.className = 'volume_bar';
-                   // video.onclick = function () {
-                    //    video.style.width = video.videoWidth + 'px';
-                    //    video.style.height = video.videoHeight + 'px';
-                   // };
+                  
                     d.appendChild(vol);
                     remotes.appendChild(d);
                 }
             });
+            //wenn keiner mehr drin, dann peer löschen
             webrtc.on('videoRemoved', function (video, peer) {
                 console.log('video removed ', peer);
                 var remotes = document.getElementById('remotes');
@@ -149,13 +156,14 @@
                     remotes.removeChild(el);
                 }
             });
+            //wenn sich die Lautstärke ändert
             webrtc.on('volumeChange', function (volume, treshold) {
-                //console.log('own volume', volume);
+                
                 showVolume(document.getElementById('localVolume'), volume);
             });
-            // Since we use this twice we put it here
+            // Setzt den Raumnamen und zeigt diesen Link an
             function setRoom(name) {
-                 // $('form').remove();
+                 
                 
                 var input = document.getElementById("sessionInput");
                 var submitter = document.getElementById("submitBut");
@@ -163,20 +171,21 @@
             input.parentNode.removeChild(input);
                 submitter.parentNode.removeChild(submitter);
                room.parentNode.removeChild(room);
-               // $('h1').text(name);
+              
                 document.getElementById("title").innerHTML= name;
-               // $('#subTitle').text('Link to join: ' + location.href);
+              
                 document.getElementById("subTitle").innerHTML="Link to join: " + location.href;
-                //$('body').addClass('active');
+                
                 var bodyActive= document.getElementById("bodyElement");
                 bodyActive.className= "active";
             }
+            
             if (room) {
                 setRoom(room);
             } else {
                 document.getElementById("submitBut").onclick= function(){
             
-            // var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
+           
                    var val = document.getElementById("sessionInput").value.replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
                       webrtc.createRoom(val, function (err, name) {
                         console.log(' create room cb', arguments);
@@ -192,40 +201,16 @@
                     return false;    
             };
             }
-            var button = 
-                //$('#screenShareButton')
-                document.getElementById("screenShareButton"),
-                setButton = function (bool) {
-                    button.text(bool ? 'share screen' : 'stop sharing');
-                };
-            webrtc.on('localScreenStopped', function () {
-                setButton(true);
-            });
-            setButton(true);
-            button.click(function () {
-                if (webrtc.getLocalScreen()) {
-                    webrtc.stopScreenShare();
-                    setButton(true);
-                } else {
-                    webrtc.shareScreen(function (err) {
-                        if (err) {
-                            setButton(true);
-                        } else {
-                            setButton(false);
-                        }
-                    });
-                    
-                }
-            });
+           
         </script>
         
          <!--DATA-->
           <script>
-// grab the room from the URL
+//speichern der URL in der variaben room
 var room = location.search && location.search.split('?')[1];
 
 
-// called when a peer is created
+// wird aufgerufen wenn ein peer erstellt wurde
 webrtc.on('createdPeer', function (peer) {
     console.log('createdPeer', peer);
     var remotes1 = document.getElementById('remotes1');
@@ -233,32 +218,34 @@ webrtc.on('createdPeer', function (peer) {
     var container = document.createElement('div');
     container.className = 'peerContainer';
     container.id = 'container_' + webrtc.getDomId(peer);
+    var containername =container.id;
 
+  // erstellen eines inputs, wo man was auswählen kann
+    var fileinput = document.createElement('input');
+    fileinput.type = 'file';
+    fileinput.id="Upload";
 
-    // show a list of files received / sending
+   
+    // erstelle eine Liste für empfangene und gesendete Dateien
     var filelist = document.createElement('ul');
     filelist.className = 'fileList';
     container.appendChild(filelist);
-
-    // show a file select form
-    var fileinput = document.createElement('input');
-    fileinput.type = 'file';
-
-    // send a file
+ // eine Datei senden
     fileinput.addEventListener('change', function() {
         fileinput.disabled = true;
 
         var file = fileinput.files[0];
         var sender = peer.sendFile(file);
+  
 
-        // create a file item
+        // ein List-Item erstellen
         var item = document.createElement('li');
         item.className = 'sending';
 
-        // make a label
+        // dem List-Item den Namen der Datei und die Größe anheften
         var span = document.createElement('span');
         span.className = 'filename';
-        span.appendChild(document.createTextNode(file.name));
+        span.appendChild(document.createTextNode(file.name+" "));
         item.appendChild(span);
 
         span = document.createElement('span');
@@ -266,32 +253,32 @@ webrtc.on('createdPeer', function (peer) {
         span.appendChild(document.createTextNode((file.size/1048576).toFixed(2) + ' MB'));
         item.appendChild(span);
 
-        // create a progress element
+        // ein Fortschritt-Element erstellen und dem List-Item hinzufügen
         var sendProgress = document.createElement('progress');
         sendProgress.max = file.size;
         item.appendChild(sendProgress);
 
-        // hook up send progress
+        // verbinde sendProgress mit den gesendeten Bytes
         sender.on('progress', function (bytesSent) {
             sendProgress.value = bytesSent;
         });
-        // sending done
+        // wenn die Datei gesendet wurde Textknoten an das List-Item anheften
         sender.on('sentFile', function () {
             item.appendChild(document.createTextNode('sent'));
 
-            // we allow only one filetransfer at a time
+            // es wird nur eine Datei zu einer Zeit zugelassen
             fileinput.removeAttribute('disabled');
         });
-        // receiver has actually received the file
+        // wenn der Empfänger die Datei erhalten hat
         sender.on('complete', function () {
-            // safe to disconnect now
+            
         });
         filelist.appendChild(item);
     }, false);
     fileinput.disabled = 'disabled';
     container.appendChild(fileinput);
 
-    // show the ice connection state
+    // zeig den ice connection Status
     if (peer && peer.pc) {
         var connstate = document.createElement('div');
         connstate.className = 'connectionstate';
@@ -306,43 +293,45 @@ webrtc.on('createdPeer', function (peer) {
                 connstate.innerText = 'Connecting to peer...';
                 break;
             case 'connected':
-            case 'completed': // on caller side
+            case 'completed': // auf der Caller Seite
                 connstate.innerText = 'Connection established.';
-                // enable file sending on connnect
+                // ermöglicht eine Datei zu schicken
                 fileinput.removeAttribute('disabled');
                 break;
             case 'disconnected':
                 connstate.innerText = 'Disconnected.';
                 break;
             case 'failed':
-                // not handled here
+                
                 break;
             case 'closed':
                 connstate.innerText = 'Connection closed.';
 
-                // disable file sending
+                // deaktiviere Datei Senden
                 fileinput.disabled = 'disabled';
-                // FIXME: remove container, but when?
+                var elem = document.getElementById(containername);
+                elem.parentNode.removeChild(elem);
                 break;
             }
         });
     }
+    //den Status an unsere Struktur anheften
     remotes1.appendChild(container);
 
-    // receiving an incoming filetransfer
+    // eine Datei erhalten , dafür ein Li-Item erstellen
     peer.on('fileTransfer', function (metadata, receiver) {
         console.log('incoming filetransfer', metadata);
         var item = document.createElement('li');
         item.className = 'receiving';
 
-        // make a label
+        // dem List-Item Name und Größe der Datein anfügen
         var span = document.createElement('span');
         span.className = 'filename';
         span.appendChild(document.createTextNode(metadata.name));
         item.appendChild(span);
 
         span = document.createElement('span');
-        span.appendChild(document.createTextNode((metadata.size/1048576).toFixed(2) + ' MB'));
+        span.appendChild(document.createTextNode((+metadata.size/1048576).toFixed(2) + ' MB'));
         item.appendChild(span);
 
         // create a progress element
@@ -350,11 +339,11 @@ webrtc.on('createdPeer', function (peer) {
         receiveProgress.max = metadata.size;
         item.appendChild(receiveProgress);
 
-        // hook up receive progress
+        // den Fortschritt anzeigen
         receiver.on('progress', function (bytesReceived) {
             receiveProgress.value = bytesReceived;
         });
-        // get notified when file is done
+        // benachrichtigen, dass Datei erhalten wurde und eine Download-Möglichkeit erstellen
         receiver.on('receivedFile', function (file, metadata) {
             console.log('received file', metadata.name, metadata.size);
             var href = document.createElement('a');
@@ -363,45 +352,53 @@ webrtc.on('createdPeer', function (peer) {
             href.appendChild(document.createTextNode('download'));
             item.appendChild(href);
 
-            // close the channel
+            // Channel schließen
             receiver.channel.close();
         });
+        // List-Item anfügen
         filelist.appendChild(item);
     });
 });
 
-// local p2p/ice failure
+// lokal p2p/ ice fehlgeschlagen
 webrtc.on('iceFailed', function (peer) {
-    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('local fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
+        connstate.parentNode.removeChild(connstate);
     }
 });
 
-// remote p2p/ice failure
+
+// gegenüber p2p/ice fehlgeschlagen
 webrtc.on('connectivityError', function (peer) {
-    var connstate = document.querySelector('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
-    var fileinput = document.querySelector('#container_' + webrtc.getDomId(peer) + ' input');
+    var connstate = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' .connectionstate');
+    var fileinput = document.getElementsByClassName('#container_' + webrtc.getDomId(peer) + ' input');
     console.log('remote fail', connstate);
     if (connstate) {
         connstate.innerText = 'Connection failed.';
         fileinput.disabled = 'disabled';
+       
+connstate.parentNode.removeChild(connstate);
+        
     }
 });
+            
+              document.getElementById("remotes1").scrollTop=document.getElementsById("remotes1").scrollHeight;
 
 
 
         </script>
 
         
-        
+        <!-- Chat Input-Bereich, eintippen und absenden von Nachrichten -->
 		<footer id="unten" >
 			<input onkeypress="return myFunction(event)" id="name" type="text" placeholder="Dein Name" />
 			<input onclick="versuchsenden()" id="senden" type="submit" class="btn" value="Senden" />
 		</footer>
-        <script src="client.js"></script>
+    
 	</body>
 </html>

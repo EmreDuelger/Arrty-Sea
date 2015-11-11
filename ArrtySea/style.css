@@ -1,4 +1,4 @@
-/* Allgemeiner Style */ 
+/* Allgemeiner Style für HTML */ 
 body {
 	background-image: url(images/rigging.jpg);
     background-color: rgba(51, 51, 51, 0.96);
@@ -9,8 +9,6 @@ body {
 	margin:0em;
 	padding:0em;
 }
-
-
 
 h2 {
 	font-size:1.563em;
@@ -23,16 +21,6 @@ h2 {
 	text-align:center;
 }
 
-
-p {
-	line-height:1.25em;
-	font-family:Helvetica;
-	font-weight:100;
-	color:#2F2D2C;
-	margin:0em;
-	padding:1.25em;
-
-}
 
 ul {
 	margin:0px;
@@ -49,17 +37,13 @@ li {
 	padding:0em;
 	margin:0.313em 0em 0.313em 0em;
 }
-section ul li a img#oben {
-	width:90%;
-	height:auto;
-	max-width:100%;
-}
+
 a {
 	text-decoration: none;
 }
 /* Navigations-Leiste */
 nav {
-	display:;
+	
 	height:2.5em;
 	text-align:center;
 }
@@ -98,9 +82,6 @@ nav ul li a:active {
     background-image: url(images/title.png);
     background-position: center;
     background-repeat: no-repeat;
- /* Logo rechts
-    border-image: url(images/penguin.png) 0 50 50 0 stretch repeat;
-    border-image-width:auto; */
    	line-height: 35px;
 	height: 45px; 
 } 
@@ -178,7 +159,7 @@ display: inline-block;
 
 }
 
-/* Footer & Header chat*/ 
+/* Footer chat*/ 
 footer{
 	display: block;
 	position: fixed;
@@ -187,17 +168,13 @@ footer{
 	right: 0;
 	bottom: auto;
 	padding: 0 10px;
-	
-   background:#4bc8c8;
+    background:#4bc8c8;
 	font-size: 24px;
 	line-height: 35px;
 	height: 45px;
 	color: #ffffff;
 }
-header{
-	font-weight: bold;
-    position: relative;
-}
+
 footer{
     display: block;
 	top: auto;
@@ -214,75 +191,20 @@ input{
 	list-style: none;
     height: 7.5em;
     overflow: auto;
-   background-color: lightcyan;
+    background-color: lightcyan;
 }
 #senden {
-margin-left: 14em;
+    margin-left: 15em;
     margin-top: -1.6em;
+    height: 50%
 }
 #name{
 margin-top: 0.5em;
 }
-/* Filetransfer*/
-.alert img {
-                float:left;
-                padding-right: 10px;
-            }
-
-            .peerblock {
-                width: 800px;
-                border-radius:2px;
-                border:1px solid gray;
-            }
-
-            .receiveBlock {
-                width: 500px;
-                margin:10px;
-                display: inline-block;
-            }
-            .dragndrop {
-                display: inline-block;
-                padding:2em;
-                margin: 2px;
-                border:2px solid black;
-                border-radius: 5px;
-            }
-            .dragndropStatus {
-                display: inline-block;
-            }
-            .connecting {
-                background-color: yellow;
-            }
-            .usesSockets {
-                background-color: pink;
-            }
-            .notConnected {
-                visibility:hidden;
-            }
-            .connected {
-                background-color: #e0ffe0;
-            }
-            .notConnected:hover {
-                margin: 1px;
-                border-width: 3px;
-            }
-            .connected:hover {
-                margin: 1px;
-                border-width:3px;
-            }
-            .connectButton {
-                padding:2em;
-            }
-#upload {
-    
-    width: 100%;
-    
-
-}
 
 /*WebRTC CSS*/
 
-.videoContainer {
+            .videoContainer {
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -301,7 +223,7 @@ margin-top: 0.5em;
                 
             }
             .parent{
-            position: relative;
+                position: relative;
                 width: 100%;
                 height: 22.5em;
                
@@ -327,11 +249,16 @@ margin-top: 0.5em;
                 bottom: 0px;
                 background-color: #12acef;
             }
-.fileList{
-  overflow: auto;
-    height: 4.5em;
-}
-            
+/* Filetransfer */
+            .fileList{
+                overflow: auto;
+                height: 4.5em;
+            }
+             #upload {
+    
+                width: 100%;
+            }
+
 /* Responsive Design*/
 @media screen and (max-width:800px) {
 	body {
@@ -339,6 +266,7 @@ margin-top: 0.5em;
 	}
      
 }
+/*Tabletansicht*/
 @media screen and (max-width:600px) {
 	#main aside, #main article {
 		width:100%;
@@ -350,7 +278,7 @@ margin-top: 0.5em;
     
     }
 }
-
+/*Mobile Ansicht*/
 @media screen and (max-width:550px) {
 	body {
 		font-size:86%;
