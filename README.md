@@ -1,4 +1,6 @@
 # Arrty-Sea
+Im Rahmen der Vorlesung "Web Programmierung" von Prof. Dr.-Ing. habil. Dennis Pfisterer haben wir ein eigenes kleines Projekt implementiert. Die folgende Beschreibung dient als Anleitung und schafft erste Eindrücke über unser Projekt.   
+
 Die Webanwendung ermöglicht Echtzeitkommunikation für zwei Personen. Sie haben die Möglichkeit sich gegenseitig zu hören und zu sehen, miteinander zu chatten und Dateien zu senden und empfangen. Sie möchten mehr erfahren? Dann lesen Sie weiter und probieren Sie es selbst aus!
 
 Downloaden Sie den Ordner und machen Sie in der Eingabekonsole "npm install". In der Eingabekonsole starten Sie den Server, indem Sie "node server.js" eintippen.
