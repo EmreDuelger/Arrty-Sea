@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>ArrtySea</title>           
-        <!-- Verschiedene Varianten des Pinguins für Android & IOS-->
+        <!-- Verschiedene Varianten des Pinguins für Android & IOS/ Sowie um die "Quasi-App" zu ermöglichen-->
         <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
         <link rel="shortcut icon" sizes="196x196" href="icons/android-chrome-196x196.png">
@@ -19,7 +19,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		
 		<script type="text/javascript">
-            //Funktion zum anzeigen und verbergen
+            //Funktion zum anzeigen und verbergen 
             function toggle_visibility(id) {
        var e = document.getElementById(id);
        if(e.style.display == 'block')
@@ -168,9 +168,9 @@
                 var input = document.getElementById("sessionInput");
                 var submitter = document.getElementById("submitBut");
                 var room = document.getElementById("createRoom");
-            input.parentNode.removeChild(input);
+                input.parentNode.removeChild(input);
                 submitter.parentNode.removeChild(submitter);
-               room.parentNode.removeChild(room);
+                room.parentNode.removeChild(room);
               
                 document.getElementById("title").innerHTML= name;
               
@@ -334,7 +334,7 @@ webrtc.on('createdPeer', function (peer) {
         span.appendChild(document.createTextNode((+metadata.size/1048576).toFixed(2) + ' MB'));
         item.appendChild(span);
 
-        // create a progress element
+        // ein Fortschritt-Element kreieren und dem List-Item anfügen
         var receiveProgress = document.createElement('progress');
         receiveProgress.max = metadata.size;
         item.appendChild(receiveProgress);
@@ -386,8 +386,8 @@ connstate.parentNode.removeChild(connstate);
         
     }
 });
-            
-              document.getElementById("remotes1").scrollTop=document.getElementsById("remotes1").scrollHeight;
+//Scrollbalken
+document.getElementById("remotes1").scrollTop=document.getElementsById("remotes1").scrollHeight;
 
 
 
